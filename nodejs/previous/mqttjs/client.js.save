@@ -1,0 +1,7 @@
+// Initialize dependencies
+const mqtt = require('mqtt');
+const client = mqtt.connect('mqtt://127.0.0.1');
+
+// Start using client
+client.on()
+
