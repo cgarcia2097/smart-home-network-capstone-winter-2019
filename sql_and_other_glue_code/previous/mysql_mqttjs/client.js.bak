@@ -1,0 +1,56 @@
+// Initialize dependencies
+const mqtt = require('mqtt');
+const mysql = require('mysql');
+
+// MQTT-related info
+var topic = "sensors/incoming_data";
+var object = NULL;
+
+// Connect to broker
+const client = mqtt.connect('mqtt://127.0.0.1:1883');
+
+// Connect to MySQL database
+const sqldb = mysql.createConnection({
+	host: "localhost",
+	user: "cbgarcia",
+	password: "paganihuayra7769%",
+	database: "sensor"
+})
+
+sqldb.connect(function(err){
+	if(err) throw err;
+	console.log("Connected to sensor database... ");
+})
+
+// Subscribe to the topic
+console.log("Subscribing to topic... ");
+client.subscribe(topic, function(err){
+
+	if(!err){
+
+		// Read Message from topic
+     	console.log("Reading message from topic ...");
+		client.on('message', function(topic, message){
+		console.log("String received: " + message.toString());
+
+			if(message.toString() === "END"){
+				console.log("Goodbye... ");
+				client.end();
+			}
+			else{
+				object = JSON.parse(message.toString());
+
+				// Check if the JSON object is valid
+				console.log("Device Type: " + object.device_type + ", Device ID: " + object.device_ID + ", Value: " + object.value + "\n");
+
+				var sql = "INSERT INTO sensor_db (time, device_type, device_ID, value) VALUES (CURRENT_TIMESTAMP,?)";
+				var entry = [object.device_type, object.device_ID, object.value];
+
+				sqldb.query(sql, [entry], function(err,result){
+					if (err) throw err;
+					console.log("Number of records inserted: " + result.affectedRows);
+				});
+			}
+		});
+	}
+});
