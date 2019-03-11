@@ -1,0 +1,16 @@
+{
+    "name": "mqttjs_to_msql_",
+    "version": "1.0.0",
+    "description": "Receives MQTT messages, verifies them for proper entries, then stores validated entries to SQL database",
+    "author": "Charles Garcia <charles.garcia@ryerson.ca>",
+    "main": "mqtt_mysql.js",
+    "scripts": {
+      "start": "node mqtt_mysql.js"
+    },
+    "dependencies": {
+      "mysql" : "^2.16.0",
+      "mqtt": "^2.18.8"
+    }
+  }
+  
+  

@@ -1,0 +1,20 @@
+{
+    "name": "post_to_mqtt",
+    "version": "1.0.0",
+    "description": "Receives an HTTP POST request with formatted JSON string, parses it for commands, then publishes that command over MQTT",
+    "main": "post_mqtt_1.1.js",
+    "scripts": {
+      "test": "node post_mqtt_1.1.js"
+    },
+    "author": "Charles Garcia <charles.garcia@ryerson.ca>",
+    "license": "MIT",
+    "dependencies": {
+      "http":"^0.0.0",
+      "request":"^2.88.0",
+      "body-parser": "^1.18.3",
+      "mqtt": "^2.18.8"
+    },
+    "devDependencies": {
+      "nodemon": "^1.18.10"
+    }
+  }
