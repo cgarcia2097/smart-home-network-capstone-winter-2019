@@ -28,8 +28,6 @@ Request size: undefined, Body size: 69
 Input JSON: {"device_type":"sonoff","device_ID":"sonoff-42069666","command":"ON"}
 Device Type: sonoff, Device ID: sonoff-42069666, Command: ON
 Output JSON: {"device_type":"sonoff", "device_ID":"sonoff-42069666", "command":"ON"}
-^C
-
 ```
 - MQTT terminal
 ```
@@ -38,7 +36,7 @@ blah@blah:~/post_to_mqtt$ mosquitto_sub -t "sensors/commands"
 ```
 - Client terminal
 ```
-blah@blah:~/Desktop/post_to_mqtt$ node client.js 
+blah@blah:~/post_to_mqtt$ node client.js 
 {"response":"OK"}
 ```
 ### Erroneous entry (Bad JSON, unsupported device, unsupported commands)
